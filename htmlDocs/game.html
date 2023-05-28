@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/jquery-3.6.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            var pad = $("li").css("padding");
+            $("li").each(function(i){
+                $(this).mouseenter(function(){
+                    $(this).animate({
+                        padding: "20px"
+                    }).mouseleave(function(){
+                        $(this).animate({
+                            padding: "10px"
+                        });
+                    });
+                });
+            });
+        });
+    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="../css/index.css">
+    <style>
+        .game {
+            margin: 30px auto;
+            max-width: 50%;
+        }
+        td {
+            width: 5px;
+            height: 100px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <nav class="n white">
+        <h2>
+            <img src="../images/athena.png">
+            <div onclick="document.location='./home.html'">ATHENA</div>
+        </h2>
+        <div id="searchBar">
+            <input id="bar" type="text" placeholder="Search for a course">
+            <input id="go" type="button" value="&#128269">
+        </div>
+        <div id="info">
+            <ul id="nav">
+                <li onclick="document.location='./game.html'">GAME</li>
+                <li onclick="document.location='./courses.html'">COURSES</li>
+                <li>INSTRUCTORS</li>
+                <li>COMMUNITY</li>
+            </ul>
+        </div>
+    </nav>
+    <div>
+        <h1 class="name central-align">Memory Tile Game</h1>
+        <input type="text" placeholder="Number of tiles" id="tiles" class="center-align s6">
+        <input type="button" class="btn pink darken-1 white-text" value="Start">
+    </div>
+    <h2 class="score center-align"></h2>
+    <h3 class="mistakes center-align"></h3>
+    <h4 class="winOrLose"></h4>
+    <div class="game">
+        <table class="striped">
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var i;
+        var score = 0;
+        var mistakes = 0;
+        var tiles = [];
+        var tileNum;
+
+        $(".btn").click(function game(){
+            clear();
+            $("td").each(function(i){
+                        $(this).removeClass("blackTile");
+                    });
+            $(".winOrLose").text("");
+            $(".score").text("Score = 0");
+            $(".mistakes").text("Mistakes = 0");
+            mistakes = 0;
+            score = 0;
+
+            tileNum = parseInt(document.getElementById("tiles").value);
+            var tileRow, tileCol;
+
+            if (isNaN(tileNum)){
+                window.alert("Please enter an integer!");
+            } else if (tileNum > 48){
+                window.alert("Please enter a number lower than 35!");
+            } else {
+                var i;
+                for(i = 0; i < tileNum; i++){
+                    tileRow = Math.floor(Math.random() * 6 + 1);
+                    tileCol = Math.floor(Math.random() * 8 + 1);
+
+                    var that = `tr:nth-of-type(${tileRow}) td:nth-of-type(${tileCol})`;
+                    $(that).css("background-color", "black");
+                    $(that).addClass('blackTile');
+                }
+
+                var timerId = setTimeout(clear, 3000);
+            }
+        });
+
+        $("td").each(function(){
+                    $(this).click(function(){
+                        if ($(this).hasClass("blackTile") && $(this).css("background-color") != "rgb(0, 0, 0)"){
+                            $(this).css("background-color", "black");
+                            score++;
+                        }
+                        else if ($(this).css("background-color") != "rgb(0, 0, 0)" && score != tileNum) {
+                            if (mistakes < 3){
+                                mistakes++;
+                                console.log(mistakes);
+                            }
+                            else {
+                                $(".blackTile").each(function(){
+                                    $(this).css("background-color", "black");
+                                });
+                                $(".winOrLose").text("You Lost!");
+                            }
+                        }
+                        $(".score").text(`Score = ${score}`);
+                        $(".mistakes").text(`Mistakes = ${mistakes}/3`);
+
+                        if (score == tileNum){
+                            $(".winOrLose").text("Congratulations! You Won!");
+
+                        }
+                    });
+                });
+
+        function clear(){
+            $("td").each(function(i){
+                        $(this).css("background-color", "white");
+                    });
+        }
+
+    </script>
+</body>
+</html>

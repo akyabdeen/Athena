@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <script type="text/javascript" src="../js/jquery-3.6.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            var pad = $("li").css("padding");
+            $("li").each(function(i){
+                $(this).mouseenter(function(){
+                    $(this).animate({
+                        padding: "20px"
+                    }).mouseleave(function(){
+                        $(this).animate({
+                            padding: "10px"
+                        });
+                    });
+                });
+            });
+        });
+    </script>
+    <style>
+        .courseContent {
+            margin: 100px auto;
+            max-width: 80%;
+        }
+
+        .course {
+            background-color: rgba(0, 0, 0, 0.1);
+            margin: 25px auto;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar-fixed">
+        <h2>
+            <img src="../images/athena.png">
+            <div onclick="document.location='./home.html'">ATHENA</div>
+        </h2>
+        <div id="searchBar">
+            <input id="bar" type="text" placeholder="Search for a course">
+            <input id="go" type="button" value="&#128269">
+        </div>
+        <div id="info">
+            <ul id="nav">
+                <li onclick="document.location='./game.html'">GAME</li>
+                <li onclick="document.location='./courses.html'">COURSES</li>
+                <li>INSTRUCTORS</li>
+                <li>COMMUNITY</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="courseContent">
+        <div class="course">
+            <div>Learn the wonders of the universe, through our intensive course curriculum</div>
+        </div>
+        
+        <div class="course">
+            <div>Learn the wonders of the universe, through our intensive course curriculum</div>
+        </div>
+        
+        <div class="course">
+            <div>Learn the wonders of the universe, through our intensive course curriculum</div>
+        </div>
+    </div>
+    <script>
+
+    </script>
+</body>
+</html>

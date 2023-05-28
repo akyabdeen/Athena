@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="../js/jquery-3.6.0.js"></script>
+    <script>
+        $(document).ready(function () {
+            var pad = $("li").css("padding");
+            $("li").each(function(i){
+                $(this).mouseenter(function(){
+                    $(this).animate({
+                        padding: "20px"
+                    }).mouseleave(function(){
+                        $(this).animate({
+                            padding: "10px"
+                        });
+                    });
+                });
+            });
+        });
+
+        $.fn.calculatePrice = function(number){
+            $(this).text("Total price is : $" + (number * 150 + 30));
+        }
+
+        $("#calc").click(function(){
+            $("#totalPrice").calculatePrice(document.getElementById("courseNum").value);
+        });
+
+    </script>
+    <link rel="stylesheet" href="../css/index.css">
+    <style>
+        h1 {
+            margin: 0 auto;
+            padding-top: 5%;
+            font-size: 50px;
+        }
+
+        .slideshow {
+            max-width: 50%;
+            position: relative;
+            border-radius: 10%;
+            margin: 2%;
+        }
+
+        .slideshow img{
+            border-radius: 5%;
+            width: 600px;
+            height: 450px;
+        }
+
+        .previous, .next {
+            cursor: pointer;
+            position: absolute;
+            width: auto;
+            margin-top: -45%;
+            padding: 3%;
+            color: rgb(255, 255, 255);
+            font-weight: bold;
+            font-size: 150%;
+            border-radius: 10%;
+        }
+
+        .next {
+            right: -1.25%;
+        }
+
+        .previous {
+            left: 0;
+        }
+
+        .previous:hover, .next:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+
+        #text {
+            /* background-color: rgba(0, 0, 0, 0.7); */
+            width: 100%;
+            margin-left: 0.5%;
+            border-radius: 30px;
+            color: rgb(0, 0, 0);
+            font-weight: bold;
+            font-size: 100%;
+            font-family: Courier;
+            bottom: 10px;
+            /* position: absolute; */
+            text-align: center;
+        }
+        
+        .about {
+            background-color: rgba(107, 106, 106, 0.07);
+            padding: 2%;
+            border-radius: 30px;
+            display: flex;
+            margin: 5% auto;
+            width: 80%;
+            text-align: center;
+        }
+
+        .des {
+            width: 30%;
+            margin: auto;
+        }
+
+        .des:nth-last-of-type(2){
+            margin-left: 100px;
+            bottom: 20px;
+        }
+
+        .des div {
+            margin: auto;
+            font-size: 100%;
+            text-align: justify;
+        }
+
+        .slideshow {
+            margin-right: 5%;
+        }
+
+        #certification {
+            margin-left: 50px;
+        }
+
+        #button {
+            margin-top: 10%;
+            font-size: 15px;
+            background-color: black;
+            color: white;
+            padding: 20px 30px;
+            border-radius: 50px;
+        }
+
+        .about:nth-of-type(2) div img {
+            width: 25%;
+            height: 50%;
+        }
+
+        td {
+            text-align: center;
+            font-size: 10px;
+            width: 220px;
+            border-bottom: 1px solid grey;
+        }
+
+        #instructors table tr td img {
+            width: 75px;
+            height: 125px;
+        }
+
+        footer {
+            box-shadow: 0 10px 35px grey;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 70%;
+            margin: auto;
+            margin-top: 100px;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <h2>
+            <img src="../images/athena.png">
+            <div onclick="document.location='./home.html'">ATHENA</div>
+        </h2>
+        <div id="searchBar">
+            <input id="bar" type="text" placeholder="Search for a course">
+            <input id="go" type="button" value="&#128269">
+        </div>
+        <div id="info">
+            <ul id="nav">
+                <li onclick="document.location='./game.html'">GAME</li>
+                <li onclick="document.location='./courses.html'">COURSES</li>
+                <li>INSTRUCTORS</li>
+                <li>COMMUNITY</li>
+            </ul>
+        </div>
+    </nav>
+    <h1>Learn, Grow, Build</h1>
+    <div class="about">
+        <div class="des">
+            <h2>Description</h2>
+            <div>Intensive courses that will take you to the heart of each discipline.
+                You will explore all topics in a given subject to reach mastery. Links to
+                other disciplines will be made to increase your ability to think interdisciplinarily.
+            </div>
+            <input type="button" value="Learn More" id="button">
+        </div>
+        <div class="slideshow">
+            <img name="slide">
+            <div id="text" class="center-align white"></div>
+            <a class="previous" onclick="changeImage(-1)">&#10999;</a>
+            <a class="next" onclick="changeImage(1)">&#11000;</a>
+        </div>
+    </div>
+    <div class="about">
+        <div class="des">
+            <h2>Certification</h2>
+            <div>Put yourself on the radar and get certified by a wide variety of well
+                established organizations, become hireable in any of the disciplines
+                that you choose to explore.
+            </div>
+        </div>
+        <div id="certification">
+            <img src="../images/cisco.png">
+            <img src="../images/Harvard_1.svg.png">
+            <img src="../images/ibm.png">
+            <br>
+            <img src="../images/google.png">
+            <img src="../images/stanford.png">
+        </div>
+    </div>
+    <div class="about">
+        <div class="des">
+            <h2>Instructors</h2>
+            <div>Learning is all about the style of the teacher. Our community of qualified
+                educators have learned to adapt to each student's learning style, graduating
+                many from complete beginners to masters in their field.
+            </div>
+        </div>
+        <div id="instructors">
+            <table>
+                <tr>
+                    <td><img src="../images/faizan.jpg"><p>Dr. Mohammad Faizan, Engineer and Plumbing</p></td>
+                    <td><img src="../images/talal.jpeg"><p>Dr. Talal Salman Zafeer, Gender Studies</p></td>
+                    <td><img src="../images/talha.jpeg"><p>MSc Talha, Computer Science</p></td>
+                </tr>
+                <tr>
+                    <td><img src="../images/saline.jpg"><p>Dr. Selina Hajarat, Physics</p></td>
+                    <td><img src="" alt="Jawan's prof photo"><p>Director Jawan Aklouk, Cocomelon</p></td>
+                    <td><img src="../images/ali.jpeg"><p>Dr. Muhammad Ali Shahid, Neuroscience</p></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <footer>
+        <form>
+            <div>How many courses do you want to take:
+                Note*: Prices start at the fixed price of
+                $30
+            </div>
+            <input type="text" id="courseNum" placeholder="Number of courses">
+            <input type="button" id="calc" value="Buy">
+            <textarea id="totalPrice" cols="15" rows="5"></textarea>
+        </form>
+    </footer>
+    <script src="../js/index.js"></script>
+</body>
+</html>
